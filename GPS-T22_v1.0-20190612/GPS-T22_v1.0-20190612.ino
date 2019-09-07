@@ -55,6 +55,8 @@ void loop()
   Serial.print(gps.time.minute());
   Serial.print(":");
   Serial.println(gps.time.second());
+  Serial.print("Speed     : ");
+  Serial.println(gps.speed.kmph()); 
   Serial.println("**********************");
 
   smartDelay(1000);
