@@ -8,6 +8,9 @@ You must import it as gzip in sketch submenu
 in Arduino IDE
 This way, it is required to power up the GPS
 module, before trying to read it.
+
+Also get TinyGPS++ library from: 
+https://github.com/mikalhart/TinyGPSPlus
 ******************************************/
 
 #include <TinyGPS++.h>
@@ -16,6 +19,7 @@ module, before trying to read it.
 TinyGPSPlus gps;
 HardwareSerial GPS(1);
 AXP20X_Class axp;
+
 
 void setup()
 {
