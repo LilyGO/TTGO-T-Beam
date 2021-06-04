@@ -1,16 +1,17 @@
 /*****************************************
 * ESP32 GPS VKEL 9600 Bds
 ******************************************/
+#include <TinyGPS++.h>
 
-#include <TinyGPS++.h>                       
-
-TinyGPSPlus gps;                            
-HardwareSerial Serial1(1);                 
+TinyGPSPlus gps;
+/********* don't use restricted name like serial****/
+/****** prevents compilation problems ********/
+HardwareSerial GPSSerial1(1);
 
 void setup()
 {
   Serial.begin(115200);
-  Serial1.begin(9600, SERIAL_8N1, 12, 15);   //17-TX 18-RX
+  GPSSerial1.begin(9600, SERIAL_8N1, 12, 15);   //17-TX 18-RX
 }
 
 void loop()
@@ -32,19 +33,18 @@ void loop()
   Serial.println(gps.time.second());
   Serial.println("**********************");
 
-  smartDelay(1000);                                      
+  smartDelay(1000);
 
   if (millis() > 5000 && gps.charsProcessed() < 10)
     Serial.println(F("No GPS data received: check wiring"));
 }
 
-static void smartDelay(unsigned long ms)                
+static void smartDelay(unsigned long ms)
 {
   unsigned long start = millis();
   do
   {
-    while (Serial1.available())
-      gps.encode(Serial1.read());
+    while (GPSSerial1.available())
+      gps.encode(GPSSerial1.read());
   } while (millis() - start < ms);
 }
-
