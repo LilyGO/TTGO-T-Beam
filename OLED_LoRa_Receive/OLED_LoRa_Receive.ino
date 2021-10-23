@@ -8,9 +8,9 @@
 #define MISO    19   // GPIO19 -- SX1278's MISO
 #define MOSI    27   // GPIO27 -- SX1278's MOSI
 #define SS      18   // GPIO18 -- SX1278's CS
-#define RST     14   // GPIO14 -- SX1278's RESET
+#define RST     23   // GPIO14 -- SX1278's RESET
 #define DI0     26   // GPIO26 -- SX1278's IRQ(Interrupt Request)
-#define BAND    868E6
+#define BAND    915E6
 
 SSD1306 display(0x3c, 21, 22);
 String rssi = "RSSI --";
@@ -49,7 +49,7 @@ void setup() {
   Serial.println("LoRa Receiver Callback");
   SPI.begin(SCK,MISO,MOSI,SS);
   LoRa.setPins(SS,RST,DI0);  
-  if (!LoRa.begin(868E6)) {
+  if (!LoRa.begin(915E6)) {
     Serial.println("Starting LoRa failed!");
     while (1);
   }
